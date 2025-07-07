@@ -1,0 +1,143 @@
+
+.todo-container{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 0 auto;
+    max-width: 450px;
+}
+/* -------------------------------------------------------------------------- */
+/*                                 todo-header                                */
+/* -------------------------------------------------------------------------- */
+.todo-header-container{
+    display: flex;
+    gap: 10px;
+    height: 40px;
+}
+
+
+.todo-header-input{
+    flex: 1;
+    outline: none;
+    text-indent: 10px;
+    font: var(--font-m);
+    padding-right: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    color: var(--main-app-color-dark);
+    border: none;
+}
+.todo-header-input::placeholder {
+    color: var(--main-app-color-dark);
+    font-weight: var(--font-weight-bold)
+}
+
+.todo-header-input::-ms-input-placeholder { /* Edge 12 -18 */
+    color: var(--main-app-color-dark);
+    font-weight: var(--font-weight-bold);
+}
+/* -------------------------------------------------------------------------- */
+/*                                 todo-button                                */
+/* -------------------------------------------------------------------------- */
+.todo-button{
+    width: fit-content;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 100%;
+    transition: 0.3s;
+}
+.todo-button-text{
+    padding: 5px 10px;
+    font: var(--font-s);
+    text-transform: uppercase;
+    font-weight: var(--font-weight-bold);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.todo-add-button{
+    background-color: var(--main-color-success);
+    color: #fff;
+    border: 2px solid var(--main-color-success);
+}
+.todo-add-button:hover{
+    background-color: transparent;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                 todo-filter                                */
+/* -------------------------------------------------------------------------- */
+
+.todo-filter-container{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.todo-filter-button{
+    background-color: #fff;
+    color: var(--main-app-color-dark);
+    flex: 1;
+    border: 2px solid #fff;
+}
+.todo-filter-button.selected,
+.todo-filter-button:hover{
+    color: var(--main-app-color);
+    border-color: var(--main-app-color);
+    background-color: transparent;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                  todo-list                                 */
+/* -------------------------------------------------------------------------- */
+.todo-list{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0;
+}
+.todo-list-item{
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    border-left: 4px solid var(--main-app-color);
+}
+.todo-list-item.complete .todo-list-item-text::after{
+    content: '';
+    height: 1px;
+    background-color: #fff;
+    width: 90%;
+    position: absolute;
+    left: -5px;
+}
+.todo-list-item-text{
+    flex: 1;
+    text-align: left;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.todo-list-item-buttons{
+    display: flex;
+    gap: 5px;
+}
+
+.todo-button-icon{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.todo-button-icon svg{
+    width: 15px;
+    height: 15px;
+}
+.todo-button-icon.check{
+    background-color: var(--main-color-success);
+}
+.todo-button-icon.trash{
+    background-color: var(--main-color-error);
+}
