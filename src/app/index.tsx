@@ -5,6 +5,8 @@ import { Suspense } from "react";
 import Loader from "../widgets/loader/loader";
 import MainPageAsync from "../pages/main-page/MainPage.async";
 import AdditionalPageAsync from "../pages/additional-page/AdditionalPage_async";
+import SrollToTopButton from "../widgets/scroll-to-top";
+import AuthModal from "../features/Auth/ui/auth-modal/modal";
 
 const App = () => {
     return(
@@ -21,7 +23,9 @@ const App = () => {
                   <AdditionalPageAsync/>
                 </Suspense>
               )}/>
-          </Routes> 
+            </Routes>
+            <SrollToTopButton/>
+            <AuthModal/> 
         </div>
     )
 }
