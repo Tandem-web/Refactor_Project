@@ -1,0 +1,21 @@
+.auth-header-button-container{
+    height: 100%;
+}
+.auth-button{
+    min-width: 100px;
+    height: 100%;
+    padding: 1rem;
+    background-color:var(--main-app-color);
+    border-radius: 30px;
+    font: var(--font-m);
+    font-weight: var(--font-weight-bold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    gap: 5px;
+}
+.auth-button svg{
+    width: 15px;
+    height: 15px;
+}

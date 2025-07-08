@@ -1,3 +1,9 @@
+.page header{
+  display: flex;
+  justify-content: space-between;
+  height: fit-content;
+  align-items: center;
+}
 .page-header-nav{
   width: 100%;
   display: flex;
@@ -11,7 +17,6 @@
   width: 300px;
 
   padding: 1rem;
-  margin: 10% auto;
   border-radius: 30px;
   border: 1px solid var(--main-app-color);
 

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import './index.scss';
+import AuthHeaderButton from "../../features/Auth/ui/auth-header-button";
 
 function Header() {
     return (
@@ -18,6 +19,7 @@ function Header() {
                     </div>
                     </Link>
                 </div>
+                <AuthHeaderButton/>
             </header>
         </>
     );
