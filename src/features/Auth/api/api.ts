@@ -1,4 +1,4 @@
-const __API_URL__ = 'https://mock-api.binaryboxtuts.com/api/login';
+const __API_URL__ = 'https://mock-api.binaryboxtuts.com/';
 const apiKey = process.env.REACT_APP_AUTH_API_KEY;
 
 /* -------------------------------------------------------------------------- */
@@ -6,7 +6,7 @@ const apiKey = process.env.REACT_APP_AUTH_API_KEY;
 /* -------------------------------------------------------------------------- */
 
 export const login = async (email: string, password: string) => {
-    const response = await fetch(__API_URL__, {
+    const response = await fetch(__API_URL__+'api/login', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -30,7 +30,7 @@ export const login = async (email: string, password: string) => {
 /* -------------------------------------------------------------------------- */
 
 export const register = async (username:string, email: string, password: string, confirmPassword: string) => {
-    const response = await fetch(__API_URL__, {
+    const response = await fetch(__API_URL__+'api/register', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
