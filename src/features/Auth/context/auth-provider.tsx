@@ -1,37 +1,60 @@
 import { useState, useEffect} from "react";
-import {AuthModalContext} from "./auth-context"
-import {AuthMode, AuthProviderProps} from "../model/types";
+import {AuthContext, AuthModalContext} from "./auth-context"
+import { AuthProviderProps, User } from "../model/types";
+import { login as apiLogin, register as apiRegister, logout as logoutApi} from "../api/api";
 
 
-const AuthModalProvider:React.FC<AuthProviderProps> = ({children}) => {
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-    const [authMode, setAuthMode] = useState<AuthMode>(AuthMode.LOGIN);
+const AuthProvider:React.FC<AuthProviderProps> = ({children}) => {
+    const [isAuth, setIsAuth] = useState<boolean>(false);
+    const [user, setUser ] = useState<User | null>(null);
+    const [error, setError] = useState<string | null>(null);
+  
+    const login = async (email: string, password: string) => {
+        try {
+            const data = await apiLogin(email, password);
+            setIsAuth(true);
+            setUser (data);
+            setError(null);
+        } catch (err) {
+            setIsAuth(false);
+            setError(err.message);
+        }
+    };
+    const register = async (username: string, email: string, password: string, confirmPassword: string) => {
+        try {
+            const data = await apiRegister(username, email, password, confirmPassword);
+            setError(null);
+        } catch (err) {
+            setError(err.message);
+        }
+    };
 
-    const toggleAuthMode = (mode: AuthMode) => {
-        setAuthMode(mode);
-    }
-    
-    const openModal = () => {
-        setIsModalOpen(true);
-    }
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-    }
+    const logout = async (token: string) => {
+        try {
+            const data = await logoutApi(token);
+            
+            setError(null);
+            setIsAuth(false);
+            setUser(null);
+        } catch (err) {
+            setError(err.message);
+        }
+    };
 
     const defaultProps = {
-        isAuthModalOpen: isModalOpen,
-        openAuthModal: openModal,
-        closeAuthModal: closeModal,
-        toggleAuthMode: toggleAuthMode,  
-        AuthModalMode: authMode,
+        user: user,
+        login: login,
+        register: register,
+        logout: logout,
+        isAuth: isAuth,
+        error: error
     }
 
     return(
-        <AuthModalContext.Provider value={defaultProps}>
+        <AuthContext.Provider value={defaultProps}>
             {children}
-        </AuthModalContext.Provider>
+        </AuthContext.Provider>
     )
 }
 
-export default AuthModalProvider
+export default AuthProvider

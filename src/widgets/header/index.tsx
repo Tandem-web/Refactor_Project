@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import './index.scss';
 import AuthHeaderButton from "../../features/Auth/ui/auth-header-button";
+import { useAuth } from "../../features/Auth/hooks/useAuth";
 
 function Header() {
+    const {isAuth} = useAuth();
     return (
         <>
             <header>
@@ -18,6 +20,14 @@ function Header() {
                         Дополнительная страница
                     </div>
                     </Link>
+                    { isAuth && (
+                            <Link to={'/projects'}>
+                                <div className='page-header-nav-link'>
+                                    Проекты
+                                </div>
+                            </Link>
+                        )
+                    }
                 </div>
                 <AuthHeaderButton/>
             </header>

@@ -1,9 +1,20 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthModalContext } from "../../../../context/auth-context";
 import { AuthMode } from "../../../../model/types";
+import { useAuth } from "../../../../hooks/useAuth";
 
 function LogIn() {
-    const { toggleAuthMode } = useContext(AuthModalContext);
+    const { login, error } = useAuth();
+    const [email, setEmail] = useState<string>();
+    const [password, setPassword] = useState<string>();
+
+    const { toggleAuthMode, closeAuthModal} = useContext(AuthModalContext);
+
+    const handleLogin = async () => {
+        await login(email, password)
+        .then(() => closeAuthModal())
+    };
+
     return (
         <>
             <div className="modal-form-header">
@@ -13,14 +24,14 @@ function LogIn() {
             <div className="modal-form-container">
                 <div className="modal-form-row">
                     <label htmlFor="modal-form-input-email">E-mail</label>
-                    <input type="email" id="modal-form-input-email" className="modal-form-input"/>
+                    <input type="email" id="modal-form-input-email" onChange={(e:React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} className="modal-form-input"/>
                 </div>
                 <div className="modal-form-row">
                     <label htmlFor="modal-form-input-password">Пароль</label>
-                    <input type="password" id="modal-form-input-password" className="modal-form-input"/>
+                    <input type="password" id="modal-form-input-password" onChange={(e:React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} className="modal-form-input"/>
                 </div>
                 <div className="modal-form-row">
-                    <div className="modal-form-login-button">
+                    <div className="modal-form-login-button" onClick={() => handleLogin()}>
                         Войти
                     </div>
                 </div>

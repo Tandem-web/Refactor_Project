@@ -1,8 +1,29 @@
 import { ReactElement } from "react";
 
-export interface UserAuthorized{
-    isAuthorized: boolean;
+export interface User {
+    info: {
+        id: number;
+        name: string;
+        email: string;
+        created_at: string;
+        updated_at: string;
+    };
+    token: string
 }
+export interface AuthContextProps {
+  user: User | null;
+  isAuth: boolean;
+  login: (email: string, password: string) => Promise<void>;
+  register: (username: string, email: string, password: string, confirmPassword: string) => Promise<void>;
+  logout: (token: string) => Promise<void>;
+  error: string | null;
+}
+
+export interface AuthProviderProps{
+    children: ReactElement; 
+}
+
+
 
 export enum AuthMode {
     LOGIN = 'login',
@@ -17,6 +38,6 @@ export interface AuthModalContextProps{
     AuthModalMode: AuthMode;
 }
 
-export interface AuthProviderProps{
+export interface AuthModalProviderProps{
     children: ReactElement; 
 }
