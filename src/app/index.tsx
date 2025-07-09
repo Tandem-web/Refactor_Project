@@ -9,7 +9,6 @@ import AdditionalPageAsync from "../pages/additional-page/AdditionalPage_async";
 import SrollToTopButton from "../widgets/scroll-to-top";
 import AuthModal from "../features/Auth/components/auth-modal/index";
 import AuthModalProvider from "../features/Auth/context/auth-modal-provider";
-import AuthProvider from "../features/Auth/context/auth-provider";
 import ProjectPageAsync from "../pages/project-page/ProjectPage.async";
 import { useAuth } from "../features/Auth/hooks/useAuth";
 
