@@ -1,3 +1,5 @@
+import runSomeCode from './someEdu';
+runSomeCode()
 function Store() {
     return (
         <>
