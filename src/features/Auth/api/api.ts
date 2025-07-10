@@ -71,3 +71,26 @@ export const logout = async (token: string) => {
     }
     return await response.json();
 };
+
+/* -------------------------------------------------------------------------- */
+/*                                   update                                   */
+/* -------------------------------------------------------------------------- */
+
+export const update_userInfo = async (token: string) => {
+    const response = await fetch(__API_URL__ + 'api/user', {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'X-Binarybox-Api-Key': apiKey
+        }
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Ошибка получения пользователя');
+    }
+
+    return await response.json();
+}

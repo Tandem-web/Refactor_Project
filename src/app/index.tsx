@@ -9,8 +9,8 @@ import AdditionalPageAsync from "../pages/additional-page/AdditionalPage_async";
 import SrollToTopButton from "../widgets/scroll-to-top";
 import AuthModal from "../features/Auth/components/auth-modal/index";
 import AuthModalProvider from "../features/Auth/context/auth-modal-provider";
-import ProjectPageAsync from "../pages/project-page/ProjectPage.async";
 import { useAuth } from "../features/Auth/hooks/useAuth";
+import StorePageAsync from "../pages/store-page/StorePage.async";
 
 const ProtectedRoute = ({ isAuth }: { isAuth: boolean }) => {
   return isAuth ? <Outlet /> : <Navigate to="/" replace />;
@@ -35,9 +35,9 @@ const App = () => {
                 </Suspense>
               )}/>
               <Route key="protected-route" element={<ProtectedRoute isAuth={isAuth} />}>
-                <Route key="route-3" path={'/projects'} element={(
+                <Route key="route-3" path={'/store'} element={(
                   <Suspense fallback={<Loader/>}> 
-                    <ProjectPageAsync/>
+                    <StorePageAsync/>
                   </Suspense>
                 )}/>
               </Route>

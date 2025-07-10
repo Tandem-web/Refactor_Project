@@ -1,22 +1,23 @@
 import { ReactElement } from "react";
 
+type UserInfo = {
+    id: number;
+    name: string;
+    email: string;
+    created_at: string;
+    updated_at: string;
+}
 export interface User {
-    info: {
-        id: number;
-        name: string;
-        email: string;
-        created_at: string;
-        updated_at: string;
-    };
-    token: string
+    info: UserInfo | null;
+    token: string | null;
 }
 export interface AuthContextProps {
-  user: User | null;
-  isAuth: boolean;
-  login: (email: string, password: string) => Promise<void>;
-  register: (username: string, email: string, password: string, confirmPassword: string) => Promise<void>;
-  logout: (token: string) => Promise<void>;
-  error: string | null;
+    user: User | null;
+    setUser: React.Dispatch<React.SetStateAction<User | null>>;
+    isAuth: boolean;
+    setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
+    error: string | null;
+    setError: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 export interface AuthProviderProps{

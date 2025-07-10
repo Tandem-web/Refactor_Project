@@ -21,9 +21,9 @@ function Header() {
                     </div>
                     </Link>
                     { isAuth && (
-                            <Link to={'/projects'}>
+                            <Link to={'/store'}>
                                 <div className='page-header-nav-link'>
-                                    Проекты
+                                    Магазин
                                 </div>
                             </Link>
                         )

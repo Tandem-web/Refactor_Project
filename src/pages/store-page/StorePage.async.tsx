@@ -1,10 +1,10 @@
 import { lazy, LazyExoticComponent, ComponentType } from "react";
-const ProjectPageAsync: LazyExoticComponent<ComponentType>= lazy(
+const StorePageAsync: LazyExoticComponent<ComponentType>= lazy(
   () => 
     new Promise<{ default: ComponentType }>((resolve) => {
       setTimeout(() => {
-        resolve(import('./ProjectPage'));
+        resolve(import('./StorePage'));
       }, 1000);
     })
 );
-export default ProjectPageAsync;
+export default StorePageAsync;
