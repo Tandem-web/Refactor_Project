@@ -298,4 +298,9 @@ export default function runSomeCode(){
     // const defaultParseJson:In4 = JSON.parse('{age: 25}');
     // const defaultParseJson = JSON.parse('{age: 25}') as In4;
     const parsedJson = JSONParse<In4>('{age: 25}');
+
+    // ==================================
+    // interface In5{
+        // f1: 
+    // }
 }
