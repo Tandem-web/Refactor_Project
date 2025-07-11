@@ -1,0 +1,107 @@
+.card-wrapper{
+    background-color: #15202B;
+    border-radius: 22px;
+    overflow: hidden;
+    padding: 10px;
+    border: 2px solid #4d5c68;
+}
+
+.store-list-cards-wrapper{
+  display: grid;
+  grid-template-columns: repeat(5, 225px);
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: calc(5 * 225px + 4 * 20px + 40px); 
+    // height: 100vh;
+}
+
+.card-top-wrapper{
+    position: relative;
+}
+.card-thumbnail-wrap{
+    border-radius: 12px;
+    overflow: hidden;
+}
+.card-thumbnail{
+    aspect-ratio: auto 516 / 688;
+}
+
+
+.card-app-to-favorite{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    right: 0;
+}
+
+.card-app-to-favorite svg{
+    width: 20px;
+    height: 20px;
+    transition: 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+.card-app-to-favorite:hover svg{
+    color: #9698f8;
+}
+
+.card-middle-wrapper{
+    margin-top: 12px;
+}
+
+
+.card-price{
+    color: #9698f8;
+    font: var(--font-m);
+    font-weight: var(--font-weight-bold);
+}
+
+.card-product-name-wrap{
+    margin-top: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #9d9da5;
+}
+
+.card-product-name{
+    font: var(--font-m);
+    font-weight: var(--font-weight-regular);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.card-product-category{
+    font: var(--font-m);
+    font-weight: var(--font-weight-regular);
+    color: #fff;
+}
+
+.card-bottom-wrapper{
+    margin-top: 14px;
+}
+.card-button-add-to-basket svg{
+    height: 12px;
+}
+.card-button-add-to-basket{
+    width: 100%;
+    height: 36px;
+    background-color: #4d5c68;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border-radius: 12px;
+    // border: 2px solid transparent;
+    font-size: var(--font-m);
+    line-height: 14px;
+    transition: 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+.card-button-add-to-basket:hover{
+    background-color:  #637685;
+}
