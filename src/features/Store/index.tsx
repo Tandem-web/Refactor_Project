@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import StoreList from './components/StoreList';
-import runSomeCode from './someEdu';
 import './styles/index.scss'
 import useProductsStore from './zustand-store/products-store';
 import StoreHeader from './components/StoreHeader';

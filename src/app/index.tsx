@@ -11,12 +11,14 @@ import AuthModal from "../features/Auth/components/auth-modal/index";
 import AuthModalProvider from "../features/Auth/context/auth-modal-provider";
 import { useAuth } from "../features/Auth/hooks/useAuth";
 import StorePageAsync from "../pages/store-page/StorePage.async";
+import runSomeCode from "./someEdu";
 
 const ProtectedRoute = ({ isAuth }: { isAuth: boolean }) => {
   return isAuth ? <Outlet /> : <Navigate to="/" replace />;
 };
+runSomeCode()
 
-const App = () => {
+const App = () => {    
     const {isAuth} = useAuth();
 
     return(

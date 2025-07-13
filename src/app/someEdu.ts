@@ -291,16 +291,214 @@ export default function runSomeCode(){
     interface In4{
         age: number
     }
-    function JSONParse<T>(data: string):T{
-        return JSON.parse(data) as T
-    }
-    const defaultParseJson = JSON.parse('{age: 25}');
+    // function JSONParse<T>(data: string):T{
+    //     return JSON.parse(data) as T;
+    // }
+    // const defaultParseJson: In4 = JSON.parse('{age:25}');
     // const defaultParseJson:In4 = JSON.parse('{age: 25}');
     // const defaultParseJson = JSON.parse('{age: 25}') as In4;
-    const parsedJson = JSONParse<In4>('{age: 25}');
+    // const parsedJson = JSONParse<In4>('{age: 25}');
 
     // ==================================
     // interface In5{
         // f1: 
     // }
+
+    const PersonKeys = {
+        age: 'age',
+        username: 'username',
+    } as const;
+
+    const keysDef = Object.keys(PersonKeys);
+
+    function testKeys<T extends object>(data: T):Array<keyof T>{
+        return Object.keys(data) as Array<keyof T>
+    }
+    const keys = testKeys(PersonKeys);
+    console.log(keys)
+    
+
+    /* -------------------------------------------------------------------------- */
+    /*                                   Typeof                                   */
+    /* -------------------------------------------------------------------------- */
+
+    const obj1 = {
+        name: 'Tandemka',
+        age: 20
+    }
+    type Me = typeof obj1;
+    
+    const MeObj: Me = {
+        name: 'NeTandemka',
+        age: 2,
+    }
+
+
+    // ============================
+    const testColor = 'red';
+    type RedColor = typeof testColor;
+
+    // const green: RedColor = 'green';
+
+
+    // ============================
+
+    function someFn1 (user: Me): number{
+        return 10;
+    }
+
+    type GetSomeFn1 = typeof someFn1;
+    type GetSomeFn1Return = ReturnType<typeof someFn1>;
+    type GetSomeFn1Params = Parameters<typeof someFn1>;
+
+
+    /* -------------------------------------------------------------------------- */
+    /*                                    KeyOf                                   */
+    /* -------------------------------------------------------------------------- */
+    type MeKey = keyof typeof obj1;
+
+    function testGetByKey<T, K extends keyof T>(obj: T, key: K): T[K]{
+        return obj[key];
+    }
+    console.log(testGetByKey(MeObj, 'name'));
+
+
+
+    /* -------------------------------------------------------------------------- */
+    /*                                  Optional                                  */
+    /* -------------------------------------------------------------------------- */
+    interface In6{
+        name: string;
+        address?: {
+            street: string;
+        };
+        getSome?: () => number; 
+    }
+
+    const in6: In6 = {
+        name: 'NeTandemka',
+    } 
+
+
+    function someFn2(user: In6){
+        console.log(in6.address?.street);
+        console.log(in6.getSome?.());
+
+        // console.log(in6.address.street);
+        // console.log(in6.getSome());
+    }
+    
+    someFn2(in6);
+
+    /* -------------------------------------------------------------------------- */
+    /*                                    Enum                                    */
+    /* -------------------------------------------------------------------------- */
+    enum EnumColor {
+        RED = 'red',
+        BLACK = 'black',
+        WHITE = 'white'
+    }
+
+    const enum EnumColor2 {
+        RED = 'red',
+        BLACK = 'black',
+        WHITE = 'white'
+    }
+
+    enum EnumColor3{
+        RED,
+        BLACK,
+        WHITE
+    }
+
+    const ObjColor = {
+        RED: 'red',
+        BLACK: 'black',
+        WHITE: 'white'
+    } as const;
+
+    type ObjColorType = typeof ObjColor[keyof typeof ObjColor];
+
+    // Или 
+
+    type ValueOf<T> = T[keyof T];
+    
+    type ObjColorType2 = ValueOf<typeof ObjColor>;
+
+    enum TestEnum1{
+        RED = 'red',
+    }
+
+    enum TestEnum2{
+        RED = 'red',
+    }
+
+    function someFn3(arg: TestEnum1){
+        console.log('some');
+    }
+
+    // someFn3(TestEnum2);
+
+
+    /* -------------------------------------------------------------------------- */
+    /*                              Type и Interface                              */
+    /* -------------------------------------------------------------------------- */
+
+    interface in7{
+        username: string,
+        age: number,
+    }
+
+    interface in8 extends in7{
+        password: string
+    }
+
+    type type7 = {
+        username: string,
+        age: number,
+    }
+
+    type type8 = type7 & {
+        password: string
+    }
+    // type type8 = {
+    //     username: string,
+    // }
+
+    // interface in8{
+    //     image: string,
+    // }
+
+    // const user: in8 = {
+    //     username: 'user',
+    //     age: 20,
+    //     password: '123',
+    //     image: 'image',
+    // }
+
+
+    /* -------------------------------------------------------------------------- */
+    /*                                Mapped Types                                */
+    /* -------------------------------------------------------------------------- */
+    interface in9{
+        username: string,
+        age: number
+    }
+
+    type ReadonlyType<T> = {
+        // readonly [P in keyof T]: T[P];
+        readonly [P in keyof T]?: T[P];
+        // readonly [P in keyof T]: T[P] | null;
+        // readonly [P in keyof T]: T[P] | string[];
+    }
+    type UnReadonlyType<T> = {
+        // -readonly [P in keyof T]: T[P];
+        -readonly [P in keyof T]-?: T[P];
+        // readonly [P in keyof T]: T[P] | null;
+        // readonly [P in keyof T]: T[P] | string[];
+    }
+    type newIn9 = ReadonlyType<in9>;
+    type newIn10 = UnReadonlyType<newIn9>;
+
+
 }
