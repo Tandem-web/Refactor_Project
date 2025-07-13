@@ -1,12 +1,16 @@
 import useProductsStore from "../../zustand-store/products-store";
 import { useShallow } from 'zustand/react/shallow';
-import StoreCard from "./StoreCard";
-import StoreCardLoader from "./StoreCardLoader";
+import StoreCard from "./components/StoreCard";
+import StoreCardLoader from "./components/StoreCardLoader";
+import useShowindStore, { Showing } from "../../zustand-store/showing-store";
+import useFavoriteStore from "../../zustand-store/favorite-store";
 
 function StoreList() {
-    const { products, loading, showFavorite } = useProductsStore(
-        useShallow((state) => ({products: state.products, loading: state.loading, showFavorite: state.showFavorite}))
+    const { products, loading} = useProductsStore(
+        useShallow((state) => ({products: state.products, loading: state.loading}))
     );
+    const favoriteIds = useFavoriteStore((state) => state.favoriteIds);
+    const showingState = useShowindStore((state) => state.showingState);
     return (
         <>
             <div className="store-list-cards-wrapper">
@@ -22,8 +26,8 @@ function StoreList() {
                     ): (
                         <>
                             {
-                                showFavorite ? (
-                                  products.filter(product => product.isFavorite).map((product) => (
+                                showingState === Showing.FAVORITE ? (
+                                  products.filter(product => favoriteIds.includes(product.id) ).map((product) => (
                                     <StoreCard key={`store-card-${product.id}`} productInfo={product}/>
                                   ))
                                 ) : (

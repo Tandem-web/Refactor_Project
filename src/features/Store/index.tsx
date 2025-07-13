@@ -4,16 +4,14 @@ import runSomeCode from './someEdu';
 import './styles/index.scss'
 import useProductsStore from './zustand-store/products-store';
 import StoreHeader from './components/StoreHeader';
+import useShowindStore, { Showing } from './zustand-store/showing-store';
+import Cart from './components/Cart';
 
 function Store() {
     const fetchProducts = useProductsStore((state) => state.fetchProducts);
     const products = useProductsStore((state) => state.products);
-    const updateInfo = useProductsStore((state) => state.updateInfo);
+    const showingState = useShowindStore((state) => state.showingState);
     
-    useEffect(() => {
-        updateInfo()
-    }, [products])
-
     useEffect(() => {
         fetchProducts();
     }, [])
@@ -21,7 +19,15 @@ function Store() {
     return (
         <>
             <StoreHeader/>
-            <StoreList/>
+            {
+                showingState === Showing.CART ? (
+                    <Cart/>
+                ) : (
+                    <StoreList/>
+                )
+            }
+            
+            
         </>
     );
 }

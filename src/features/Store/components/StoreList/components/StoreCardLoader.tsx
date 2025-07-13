@@ -1,5 +1,5 @@
 import {FaCartShopping, FaHeart } from "react-icons/fa6";
-import { Product } from "../../model/types";
+import { Product } from "../../../model/types";
 
 interface StoreCardLoaderProps{
     key: string;

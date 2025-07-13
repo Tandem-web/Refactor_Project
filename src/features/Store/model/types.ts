@@ -19,12 +19,10 @@ export type ProductsApi = ProductApi[];
 
 
 export interface Product extends ProductApi{
-    isFavorite?: boolean,
-    inCart?: boolean,
+    isFavorite: boolean,
+    inCart: boolean,
 }
 export type Products = Product[];
-
-
 
 export interface ProductBusket{
     info: Product,
