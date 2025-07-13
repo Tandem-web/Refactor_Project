@@ -4,7 +4,7 @@ export interface Category{
     image: string;
     slug: string;
 }
-export interface Product{
+export interface ProductApi{
     id:	number;
     title: string;
     price: number;
@@ -12,7 +12,23 @@ export interface Product{
     category: Category;
     images: string[];
     creationAt: string;
-    updatedAt: string;
+    updatedAt: string; 
 }
 
+export type ProductsApi = ProductApi[];
+
+
+export interface Product extends ProductApi{
+    isFavorite?: boolean,
+    inCart?: boolean,
+}
 export type Products = Product[];
+
+
+
+export interface ProductBusket{
+    info: Product,
+    amount: number
+}
+
+export type ProductsBusket = ProductBusket[];

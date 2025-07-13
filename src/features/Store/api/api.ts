@@ -1,7 +1,7 @@
-import { Products } from "../model/types";
+import { ProductsApi } from "../model/types";
 
   
-export const get_all_products = async ():Promise<Products> => {
+export const get_all_products = async ():Promise<ProductsApi> => {
     const response = await fetch('https://api.escuelajs.co/api/v1/products', {
         method: 'GET',
         headers: {

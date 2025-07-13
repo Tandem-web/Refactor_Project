@@ -1,5 +1,6 @@
 import {FaCartShopping, FaHeart } from "react-icons/fa6";
-import { Product } from "../model/types";
+import { Product } from "../../model/types";
+import useProductsStore from "../../zustand-store/products-store";
 
 interface StoreCardProps{
     productInfo: Product;
@@ -7,12 +8,15 @@ interface StoreCardProps{
 }
 
 const StoreCard: React.FC<StoreCardProps> = (props) => {
+    const toggleToFavorite = useProductsStore((state) => state.toggleToFavorite);
+    const addToBasket = useProductsStore((state) => state.addToCart);
+
     const {productInfo} = props;
     return (
         <>
             <div className="card-wrapper">
                 <div className="card-top-wrapper">
-                    <button className="card-app-to-favorite"><FaHeart/></button>
+                    <button className={`card-app-to-favorite ${productInfo.isFavorite ? 'favorite' : ''}`} onClick={() => toggleToFavorite(productInfo.id)}><FaHeart/></button>
                     <div className="card-thumbnail-wrap">
                         <img width="516" height="688" className="card-thumbnail"src={productInfo.images[0]} alt={productInfo.title} />
                     </div>
@@ -30,7 +34,25 @@ const StoreCard: React.FC<StoreCardProps> = (props) => {
                     </div>
                 </div>
                 <div className="card-bottom-wrapper">
-                    <button className="card-button-add-to-basket"><FaCartShopping/> Купить</button>
+                    <button 
+                        className={`card-button-add-to-basket ${productInfo.inCart ? 'card-button-in-busket' : ''}`}
+                        onClick={() => productInfo.inCart 
+                            ? null 
+                            : addToBasket(productInfo.id)
+                        }
+                    >
+                        {
+                            productInfo.inCart ? (
+                                <>
+                                    В корзине
+                                </>
+                            ) : (
+                                <>
+                                 <FaCartShopping/>Купить
+                                </>
+                            )
+                        }
+                    </button>
                 </div>
             </div>
         </>
