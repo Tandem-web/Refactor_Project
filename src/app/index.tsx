@@ -10,7 +10,7 @@ import SrollToTopButton from "../widgets/scroll-to-top";
 import AuthModal from "../features/Auth/components/auth-modal/index";
 import AuthModalProvider from "../features/Auth/context/auth-modal-provider";
 import { useAuth } from "../features/Auth/hooks/useAuth";
-import StorePageAsync from "../pages/store-page/StorePage.async";
+import StoreZustandPageAsync from "../pages/store-zustand-page/StoreZustandPage.async";
 import runSomeCode from "./someEdu";
 
 const ProtectedRoute = ({ isAuth }: { isAuth: boolean }) => {
@@ -39,7 +39,7 @@ const App = () => {
               <Route key="protected-route" element={<ProtectedRoute isAuth={isAuth} />}>
                 <Route key="route-3" path={'/store'} element={(
                   <Suspense fallback={<Loader/>}> 
-                    <StorePageAsync/>
+                    <StoreZustandPageAsync/>
                   </Suspense>
                 )}/>
               </Route>

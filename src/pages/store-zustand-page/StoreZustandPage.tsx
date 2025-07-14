@@ -1,12 +1,12 @@
 import '../../shared/styles/page/page.scss'
-import Store from "../../features/Store";
+import Store from "../../features/Store Zustand";
 
 
 const StorePage = () => {
     return(
         <>
             <div className="page-breadcrumbs">
-                Страница магазина
+                Страница магазина Zustand
             </div>
 
             <section>
