@@ -713,5 +713,112 @@ export default function runSomeCode(){
     f4(['red', 'yellow', 'green'], 'red');
     // f4(['red', 'yellow', 'green'], 'blue');
 
+    
+
+    type TypeOfExample = 'applesON' | 'applesOff';
+
+    // declare function someFn1(arg1: number, arg2: string): void;
+
+    type SomeFn1 = (arg1: number, arg2: string) => void;
+
+
+    interface Example{
+        age: number;
+        apples: number;
+        typeOfExample: TypeOfExample;
+        some: {
+            kek: number;
+            lol: string;
+            obj : {
+                auf : string,
+                lox : string,
+            },
+            someMethod: SomeFn1,
+        }
+    }
+
+
+    type DeepPartial<T> = {
+        [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
+    }
+
+    // const expample: Example = {
+    //     age: 12,
+    //     apples: 1,
+    //     typeOfExample: 'applesON',
+    //     some : {
+    //         kek : 123,
+    //         lol : "off",
+    //         obj : {
+    //             auf : 'no',
+    //             lox : 'asd'
+    //         },
+    //         someMethod: (1, 'hello') => {},
+    //     }
+    // }
+
+
+    // 1. TS
+    
+
+    // type TypeOfExample = 'applesON' | 'applesOff';
+
+// declare function someFn1(arg1: number, arg2: string): void;
+
+// type SomeFn1 = (arg1: number, arg2: string) => void;
+
+
+// interface Example{
+//     age: number;
+//     apples: number;
+//     typeOfExample: TypeOfExample;
+//     some: {
+//         kek: number;
+//         lol: string;
+//         obj : {
+//             auf : string,
+//             lox : string,
+//         },
+//         someMethod: SomeFn1,
+//     }
+// }
+
+
+// type DeepPartial<T> = {
+//     // [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
+//     [P in keyof T]?: T[P] extends object ? T[P] extends Function ? T[P] : DeepPartial<T[P]> : T[P];
+// }
+
+// const expample: DeepPartial<Example> = {
+//     age: 12,
+//     apples: 1,
+//     typeOfExample: 'applesON',
+//     some : {
+//         kek : 123,
+//         lol : "off",
+//         obj : {
+//             auf : 'no',
+//             lox : 'asd'
+//         },
+//         someMethod: (arg1 = 1,arg2 = 'hello') => {
+
+//         },
+//     }
+// }
+// type Join<A extends string, B extends string> =`${A}${B}`
+
+// type AB = Join<'a' | 'b', '1' | '2'>;
+//  // 'a1' | 'a2' | 'b1' | 'b2'
+
+
+// type StringPermutations<T extends string, U extends string = T> =
+//   [T] extends [never]
+//     ? ''
+//     : T extends T
+//       ? `${T}${StringPermutations<Exclude<U, T>>}` | T
+//       : never;
+
+// type ABC = StringPermutations<'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 't'>
+
 
 }
