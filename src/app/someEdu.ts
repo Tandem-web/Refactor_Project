@@ -500,5 +500,218 @@ export default function runSomeCode(){
     type newIn9 = ReadonlyType<in9>;
     type newIn10 = UnReadonlyType<newIn9>;
 
+    /* -------------------------------------------------------------------------- */
+    /*                                Utility Types                               */
+    /* -------------------------------------------------------------------------- */
+    // ============== AWAITED
+    // Этот тип предназначен для моделирования таких операций, как await в асинхронных функциях
+    // или метод .then() в Promises - в частности, способа, которым они рекурсивно разворачивают Promises.
+
+    type A1 = Awaited<Promise<string>>
+    // type A1 = string
+
+    type A2 = Awaited<boolean | Promise<number>>
+
+
+    // ============== Partial
+    // Создает тип, для которого все свойства Type имеют значение optional.
+    // Эта утилита вернет тип, представляющий все подмножества данного типа.
+
+    interface in11{
+        title: string;
+        description: string;
+    }
+
+    function updateSomething(something: in11, fieldsOfSomething: Partial<in11>){
+        return {...something, ...fieldsOfSomething};
+    }
+
+    const someIn11 = {
+        title: 'some title',
+        description: 'some description',
+    }
+
+    const some2In11 = updateSomething(someIn11, {
+        title: 'some title 2',
+    })
+    console.log(some2In11);
+
+    // ================ Required
+    // Создает тип, состоящий из всех свойств типа, для которых
+    // установлено значение required. Противоположность Partial.
+
+    interface in12 extends Partial<in11>{}
+
+    const objIn12: in12 = {
+        title: 'some title',
+    }
+
+    const obj2In12: Required<in12> = {
+        title: 'some title 3',
+        description: 'some descr'
+    }
+
+    // ================= Readonly
+    // Создает тип, состоящий из всех свойств типа, для которых
+    // установлено значение required. Противоположность Partial.
+
+    interface In13{
+        params: string;
+    }
+
+    const objIn13: Readonly<In13> = {
+        params: 'some params',
+    };
+
+    // objIn13.params = '123';
+    console.log(objIn13.params);
+
+    // Эта утилита полезна для представления выражений присваивания,
+    // которые не будут выполнены во время выполнения
+    // (т.е. при попытке переназначить свойства замороженного объекта).
+    function freeze<Type>(obj: Type): Readonly<Type>{
+        return Object.freeze(obj);
+    }
+
+
+    // ================= RECORD<Keys, Types>
+
+    type UserName = 'ivan' | 'nikita' | 'dmitriy';
+    
+    interface UserParams{
+        age: number,
+        sex: string
+    }
+
+    const users: Record<UserName, UserParams> = {
+        'nikita': {age: 20, sex: 'male'},
+        'ivan': {age: 25, sex: 'male'},
+        'dmitriy': {age: 24, sex: 'mongol'}
+    }
+
+    console.log(users.dmitriy);
+
+    // ================== PICK<Type, Keys>
+    // Создает тип, выбирая набор ключей свойств (строковый литерал
+    // или объединение строковых литералов) из Type.
+
+    interface In14{
+        title: string,
+        complete: boolean,
+        description: string
+    }
+
+    type In14Preview = Pick<In14, 'complete' | 'description'>
+
+    const objIn14: In14Preview = {
+        description: 'some descr',
+        complete: true
+    }
+
+    // =================== OMIT<Type, Keys>
+    // Создает тип, выбирая все свойства из Type и затем удаляя ключи
+    // (строковый литерал или объединение строковых литералов). Противоположность Pick.
+
+    
+    interface In15{
+        title: string,
+        complete: boolean,
+        description: string
+    }
+
+    type In15Preview = Omit<In15, 'description'>;
+
+    const objIn15: In15Preview = {
+        title: 'some title',
+        complete: true
+    }
+
+    type In15Preview2 = Omit<In15, 'complete' | 'description'>;
+    const obj2In15: In15Preview2 = {
+        title: 'some title',
+    }
+
+    // ============== Exclude<UnionType, ExcludeMembers>
+    // Создает тип путем исключения из UnionType всех членов
+    // объединения, которые могут быть назначены ExcludedMembers.
+
+    type type9 = Exclude<'a' | 'b' | 'c' | 'd', 'a'>
+
+    type type10 = Exclude<'a' | 'b' | 'c' | 'd', 'a' | 'd'>
+
+    type type11 = Exclude<string | number | (() => void), Function>
+
+    type type12 =
+    | { kind: "circle"; radius: number }
+    | { kind: "square"; x: number }
+    | { kind: "triangle"; x: number; y: number };
+
+    type type13 = Exclude<type12, {kind: 'circle'}>;
+
+    // ============== Extract<Type, Union>
+    // Создает тип, извлекая из Type все элементы объединения,
+    // которые могут быть назначены Union.
+
+    type type14 = Extract<'a' | 'b' | 'c' | 'd', 'a' | 'f'>
+
+    type type15 =
+    | { kind: "circle"; radius: number }
+    | { kind: "square"; x: number }
+    | { kind: "triangle"; x: number; y: number };
+
+    type type16 = Extract<type15, {y: number}>;
+
+    // =============== NonNunnable<type>
+    // Создает тип, исключая из Type значения null и undefined.
+
+    type type17 = NonNullable<number | string | undefined | null>
+
+    // =============== Parameters<Type>
+    // Создает тип, представляющий параметры функции Type.
+    function f2(a1: string,a2: number):void{
+
+    }
+
+    type type18 = Parameters<typeof f2>;
+    type type19 = Parameters<(()=>void)>;
+
+    type type20 = Parameters<((a: string) => string)>;
+
+    // =============== ReturnType<Type>
+    // Создает тип, который является типом возвращаемого значения функции Type.
+    function f3(a1: string,a2: number):void{
+
+    }
+
+    type type21 = ReturnType<typeof f3>;
+
+    type type22 = ReadonlyType<((a: string) => string)>;
+
+
+    // =============== InstanceType<Type>
+    // Создает тип, состоящий из типа экземпляра функции-конструктора в Type.
+
+    class C{
+        x = 0;
+        y = 0;
+    }
+
+    type type23 = InstanceType<typeof C>;
+
+    type type24 = InstanceType<any>;
+
+    type type25 = InstanceType<never>;
+
+    // =============== NoInfer<Type>
+    // Блокирует выводы о содержащемся типе. Кроме блокировки
+    // выводов, NoInfer<Тип> идентичен Type.
+
+    function f4<C extends string>(colors: C[], defaultColor?: NoInfer<C>):void{
+        // =======
+    }
+
+    f4(['red', 'yellow', 'green'], 'red');
+    // f4(['red', 'yellow', 'green'], 'blue');
+
 
 }

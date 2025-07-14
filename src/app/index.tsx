@@ -17,7 +17,7 @@ import StoreJotaiPageAsync from "../pages/store-jotai-page/StoreJotaiPage.async"
 const ProtectedRoute = ({ isAuth }: { isAuth: boolean }) => {
   return isAuth ? <Outlet /> : <Navigate to="/" replace />;
 };
-// runSomeCode()
+runSomeCode()
 
 const App = () => {    
     const {isAuth} = useAuth();
