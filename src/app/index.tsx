@@ -12,11 +12,12 @@ import AuthModalProvider from "../features/Auth/context/auth-modal-provider";
 import { useAuth } from "../features/Auth/hooks/useAuth";
 import StoreZustandPageAsync from "../pages/store-zustand-page/StoreZustandPage.async";
 import runSomeCode from "./someEdu";
+import StoreJotaiPageAsync from "../pages/store-jotai-page/StoreJotaiPage.async";
 
 const ProtectedRoute = ({ isAuth }: { isAuth: boolean }) => {
   return isAuth ? <Outlet /> : <Navigate to="/" replace />;
 };
-runSomeCode()
+// runSomeCode()
 
 const App = () => {    
     const {isAuth} = useAuth();
@@ -36,10 +37,17 @@ const App = () => {
                   <AdditionalPageAsync/>
                 </Suspense>
               )}/>
-              <Route key="protected-route" element={<ProtectedRoute isAuth={isAuth} />}>
-                <Route key="route-3" path={'/store'} element={(
+              <Route key="protected-route-1" element={<ProtectedRoute isAuth={isAuth} />}>
+                <Route key="route-3" path={'/store-zustand'} element={(
                   <Suspense fallback={<Loader/>}> 
                     <StoreZustandPageAsync/>
+                  </Suspense>
+                )}/>
+              </Route>
+              <Route key="protected-route-2" element={<ProtectedRoute isAuth={isAuth} />}>
+                <Route key="route-4" path={'/store-jotai'} element={(
+                  <Suspense fallback={<Loader/>}> 
+                    <StoreJotaiPageAsync/>
                   </Suspense>
                 )}/>
               </Route>

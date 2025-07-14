@@ -21,13 +21,19 @@ function Header() {
                     </div>
                     </Link>
                     { isAuth && (
-                            <Link to={'/store'}>
+                        <>
+                            <Link to={'/store-zustand'}>
                                 <div className='page-header-nav-link'>
-                                    Магазин
+                                    Магазин Zustand
                                 </div>
                             </Link>
-                        )
-                    }
+                            <Link to={'/store-jotai'}>
+                                <div className='page-header-nav-link'>
+                                    Магазин Jotai
+                                </div>
+                            </Link>
+                        </>
+                    )}
                 </div>
                 <AuthHeaderButton/>
             </header>
