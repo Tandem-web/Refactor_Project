@@ -13,11 +13,14 @@ import { useAuth } from "../features/Auth/hooks/useAuth";
 import StoreZustandPageAsync from "../pages/store-zustand-page/StoreZustandPage.async";
 import runSomeCode from "./someEdu";
 import StoreJotaiPageAsync from "../pages/store-jotai-page/StoreJotaiPage.async";
+import TS_code_runner from "./TS_challenges";
 
 const ProtectedRoute = ({ isAuth }: { isAuth: boolean }) => {
   return isAuth ? <Outlet /> : <Navigate to="/" replace />;
 };
-runSomeCode()
+runSomeCode();
+TS_code_runner();
+
 
 const App = () => {    
     const {isAuth} = useAuth();
